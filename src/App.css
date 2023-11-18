@@ -1,0 +1,22 @@
+
+
+.gradient__text {
+    background: linear-gradient(to right, #C3A9D2 , #A457D0 );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.gradient__bg {
+    background: linear-gradient(to bottom, #4C3087 , #6969698a );
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+  }
