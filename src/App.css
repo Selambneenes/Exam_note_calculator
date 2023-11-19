@@ -11,6 +11,11 @@
     background: linear-gradient(to bottom, #4C3087 , #6969698a );
 }
 
+.interactive__div {
+  background: linear-gradient(to right, #C3A9D2 , #A457D0 );
+
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -19,4 +24,34 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance: textfield;
-  }
+}
+
+.scroll__style {
+scrollbar-width: thin;
+  height: fit-content; 
+}
+
+.scroll__style::-webkit-scrollbar {
+  width: 12px;
+  position: absolute;
+  right: 0;
+}
+
+.scroll__style::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: 1px solid #cacaca;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+}
+
+.scroll__style::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #C3A9D2;
+}
+
+.direction__rtl {
+  direction: rtl;
+}
+
+.direction__ltr {
+  direction: ltr;
+}
