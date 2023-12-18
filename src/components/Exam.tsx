@@ -1,4 +1,4 @@
-import { MouseEvent, Dispatch } from "react";
+import { MouseEvent, Dispatch, useState } from "react";
 import InputFunc from "./InputFunc";
 
 import { FaPlus, FaTrash } from "react-icons/fa6";
@@ -11,7 +11,30 @@ type myPropsTypes = {
   state: SetupInitState;
 };
 
+type questions = {
+  id: number;
+  title: string;
+  text: string;
+};
+
 const Exam = ({ examNumber, dispatch, state }: myPropsTypes) => {
+  const [addQuestionInputValue, setAddQuestionInputValue] =
+    useState<string>("");
+  const [questions, setQuestions] = useState<questions[]>([
+    {
+      id: 1,
+      title: "Soru 1",
+      text: "hihiha",
+    },
+    {
+      id: 2,
+      title: "Soru 2",
+      text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod, libero.",
+    },
+  ]);
+  //! For title percentile Value
+
+  //? Function to find which exam component it is
   const whichOneExam = (examNumber: number): REDUCER_ACTION_TYPES => {
     switch (examNumber) {
       case 1:
@@ -25,13 +48,17 @@ const Exam = ({ examNumber, dispatch, state }: myPropsTypes) => {
     }
   };
 
+  //? this function sending value
+
   const handleTextInput = (value: number) => {
     dispatch({ type: whichOneExam(examNumber), payload: value });
   };
 
+  //? For Question
+  //! This component makes everything about question
+
   const addQuestionHandler = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    
   };
 
   return (
@@ -50,36 +77,42 @@ const Exam = ({ examNumber, dispatch, state }: myPropsTypes) => {
             <span>%</span>
           </div>
         </div>
-        <div className="setup__section-exams-exam-questions-questions__section flex flex-col overflow-y-auto  scroll__style direction__rtl">
-          <div className="direction__ltr max-h-[450px] h-auto">
-            <div className="setup__section-exams-exam-questions-questions__section-question flex ">
-              <div className="setup__section-exams-exam-questions-questions__section-question-content px-5 py-3 w-[calc(100%-100px)]">
-                <h3 className="text-xl font-semibold">Soru 1</h3>
-                <p className="text-xs max-h-[48px] overflow-auto">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit
-                  accusamus sit deleniti beatae fuga corrupti dolor atque!
-                </p>
-              </div>
-              <div className="setup__section-exams-exam-questions-questions__section-question-operations interactive__div w-[100px] h-[100px] flex flex-col justify-center items-center gap-y-3 border-l border-b border-black">
-                <div className="setup__section-exams-exam-questions-questions__section-question-operations__exam__percentage flex flex-row justify-center items-center text-3xl">
-                  {/* <InputFunc /> */}
+        {questions.map((question, index) => {
+          index += index + 1;
+          return (
+            <div className="setup__section-exams-exam-questions-questions__section flex flex-col overflow-y-auto  scroll__style direction__rtl">
+              <div className="direction__ltr max-h-[450px] h-auto">
+                <div className="setup__section-exams-exam-questions-questions__section-question flex ">
+                  <div className="setup__section-exams-exam-questions-questions__section-question-content px-5 py-3 w-[calc(100%-100px)]">
+                    <h3 className="text-xl font-semibold">
+                      {question.title} {index}
+                    </h3>
+                    <p className="text-xs max-h-[48px] overflow-auto">
+                      {question.text}
+                    </p>
+                  </div>
+                  <div className="setup__section-exams-exam-questions-questions__section-question-operations interactive__div w-[100px] h-[100px] flex flex-col justify-center items-center gap-y-3 border-l border-b border-black">
+                    <div className="setup__section-exams-exam-questions-questions__section-question-operations__exam__percentage flex flex-row justify-center items-center text-3xl">
+                      {/* <InputFunc /> */}
 
-                  <span>p</span>
+                      <span>p</span>
+                    </div>
+                    <button>
+                      <FaTrash size={27} />
+                    </button>
+                  </div>
                 </div>
-                <button>
-                  <FaTrash size={27} />
-                </button>
               </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
         <form className="setup__section-exams-exam-questions-add__question__section flex flex-row">
           <div className="setup__section-exams-exam-questions-add__question__section-information px-5 w-[calc(100%-100px)] flex flex-col gap-y-1 bg-[#C3A9D2]">
             <h4 className="text-xl font-semibold">Soru 1</h4>
             <textarea
               placeholder="Soru İçeriği giriniz..."
               className="h-[60px] bg-transparent text-sm w-[100%] resize-none border border-black rounded-lg px-1 placeholder:text-black outline-none"
-              onChange={(e) => dispatch({type: REDUCER_ACTION_TYPES.QUESTION_CONTENT, payload: e.target.value})}
+              onChange={(e) => setAddQuestionInputValue(e.target.value)}
             />
           </div>
           <button

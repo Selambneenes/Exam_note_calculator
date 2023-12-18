@@ -49,7 +49,6 @@ const InputFunc = ({
     }
   };
 
-
   return (
     <input
       type="text"

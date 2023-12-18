@@ -45,12 +45,6 @@ const reducer = (
         ...state,
         percentileValue3: action.payload,
       };
-
-    case REDUCER_ACTION_TYPES.QUESTION_CONTENT:
-      return {
-        ...state,
-        questionContentValue: String(action.payload),
-      };
     default:
       return state;
   }
